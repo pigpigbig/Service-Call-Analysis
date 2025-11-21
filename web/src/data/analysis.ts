@@ -156,7 +156,7 @@ export const stages: Stage[] = [
   {
     id: "callType",
     title: "Call Type",
-    verdict: "met",
+    verdict: "partial",
     summary:
       "Sales-focused follow-up after a repair visit, presenting HVAC replacement/upgrade options.",
     checks: [
@@ -167,6 +167,7 @@ export const stages: Stage[] = [
         timeWindow: [10, 140],
       },
     ],
+    timeWindow: [10, 140],
   },
   {
     id: "salesInsights",
