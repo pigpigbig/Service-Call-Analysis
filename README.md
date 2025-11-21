@@ -17,5 +17,7 @@ npm run dev   # visit http://localhost:5173
 ## Deploy
 GitHub Actions builds and publishes to GitHub Pages on push to `main` using `web/dist`. Vite `base` is set for `/Service-Call-Analysis/`.
 
+Live URL (after workflow succeeds): https://pigpigbig.github.io/Service-Call-Analysis/
+
 ## License
 MIT
