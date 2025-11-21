@@ -2,16 +2,20 @@
 
 Take-home for Service Call Recording Analysis.
 
-## Contents
-- Assignment brief: transcribe provided service call; score compliance (intro, diagnosis, solution explanation, upsell, maintenance plan, closing); label call type; summarize sales insights.
-- Deliverables: hosted web app with transcript + annotations, live URL, source code link.
+## What’s here
+- Transcript: `transcript/transcript.txt` (human-friendly) and `transcript/raw_transcript.json` (AssemblyAI response).
+- Analysis data: `web/src/data/analysis.ts` (stage verdicts/notes) and `web/src/data/transcript.json` (timestamped utterances).
+- Frontend: React + TypeScript + Vite in `web/`.
 
-## App scaffold
-- React + TypeScript + Vite in `web/`.
-- Run: `cd web && npm install` (first time) then `npm run dev`.
+## Run locally
+```bash
+cd web
+npm install   # first time
+npm run dev   # visit http://localhost:5173
+```
 
-## Next steps
-- Pull in audio (`Takehome/39472_N_Darner_Dr_2.m4a`) and transcribe (local Whisper or API).
-- Write compliance + sales analysis mapped to call stages.
-- Build simple web UI to present transcript and annotations; plan to deploy (GitHub Pages/Vercel/etc).
-- Add license and basic tooling once stack is chosen.
+## Deploy
+GitHub Actions builds and publishes to GitHub Pages on push to `main` using `web/dist`. Vite `base` is set for `/Service-Call-Analysis/`.
+
+## License
+MIT
