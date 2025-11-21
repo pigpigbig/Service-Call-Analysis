@@ -52,18 +52,18 @@ function App() {
             <article key={stage.id} className={`accordion ${isOpen ? 'is-open' : ''}`}>
               <header className="accordion__header" onClick={() => toggleStage(stage.id)}>
                 <div className="accordion__title">
-                  <div className={`badge badge--${stage.verdict}`}>
-                    {stage.verdict === 'met' ? 'Met' : stage.verdict === 'partial' ? 'Partial' : 'Missed'}
-                  </div>
                   <h2>{stage.title}</h2>
                 </div>
                 <div className="accordion__meta">
-                  <span className="summary">{stage.summary}</span>
                   <span className="chip">{entries.length} excerpts</span>
+                  <div className={`badge badge--${stage.verdict}`}>
+                    {stage.verdict === 'met' ? 'Met' : stage.verdict === 'partial' ? 'Partial' : 'Missed'}
+                  </div>
                 </div>
               </header>
               {isOpen && (
                 <div className="accordion__body">
+                  <p className="summary-text">{stage.summary}</p>
                   <ul className="notes">
                     {stage.notes.map((note, idx) => (
                       <li key={idx}>{note}</li>

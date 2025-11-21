@@ -154,6 +154,12 @@ h1 {
   font-weight: 600;
 }
 
+.summary-text {
+  margin: 0;
+  color: #1f2937;
+  font-weight: 600;
+}
+
 .notes {
   margin: 0;
   padding-left: 18px;
