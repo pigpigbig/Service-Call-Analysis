@@ -12,6 +12,13 @@ type TranscriptEntry = {
 function App() {
   const data = transcript as TranscriptEntry[]
 
+  const formatTime = (seconds: number) => {
+    const totalSeconds = Math.max(0, Math.floor(seconds))
+    const mins = Math.floor(totalSeconds / 60)
+    const secs = totalSeconds % 60
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`
+  }
+
   const windowed = (start?: number, end?: number) => {
     if (start === undefined || end === undefined) return data
     return data.filter((row) => row.start >= start && row.start <= end)
@@ -51,7 +58,7 @@ function App() {
                   <div className="transcript__list">
                     {entries.map((row, idx) => (
                       <div key={`${row.start}-${idx}`} className="transcript__row">
-                        <div className="time">{row.start.toFixed(2)}s</div>
+                        <div className="time">{formatTime(row.start)}</div>
                         <div className="speaker">Speaker {row.speaker}</div>
                         <div className="text">{row.text}</div>
                       </div>
@@ -72,7 +79,7 @@ function App() {
         <div className="transcript__list transcript__list--full">
           {data.map((row, idx) => (
             <div key={`${row.start}-${idx}`} className="transcript__row">
-              <div className="time">{row.start.toFixed(2)}s</div>
+              <div className="time">{formatTime(row.start)}</div>
               <div className="speaker">Speaker {row.speaker}</div>
               <div className="text">{row.text}</div>
             </div>
