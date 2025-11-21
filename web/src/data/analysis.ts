@@ -31,9 +31,15 @@ export const stages: Stage[] = [
       "Checks for greeting plus clear name/company introduction.",
     checks: [
       {
+        status: "met",
+        label: "Greet customer",
+        detail: "Opens with a greeting and casual check-in.",
+        timeWindow: [0, 40],
+      },
+      {
         status: "missed",
-        label: "Greeting + name/company",
-        detail: "Greets casually but never states their name or company.",
+        label: "Introduce self/company",
+        detail: "Never states their name or company during the greeting.",
       },
     ],
     timeWindow: [0, 80],
