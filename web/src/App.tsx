@@ -64,25 +64,45 @@ function App() {
               {isOpen && (
                 <div className="accordion__body">
                   <p className="summary-text">{stage.summary}</p>
-                  <ul className="notes">
-                    {stage.notes.map((note, idx) => (
-                      <li key={idx}>{note}</li>
-                    ))}
-                  </ul>
-                  {entries.length > 0 ? (
-                    <details className="transcript" open>
-                      <summary>Transcript excerpts</summary>
-                      <div className="transcript__list">
-                        {entries.map((row, idx) => (
-                          <div key={`${row.start}-${idx}`} className="transcript__row">
-                            <div className="time">{formatTime(row.start)}</div>
-                            <div className="speaker">Speaker {row.speaker}</div>
-                            <div className="text">{row.text}</div>
+                  <ul className="checks">
+                    {stage.checks.map((check, idx) => {
+                      const subset = check.timeWindow
+                        ? windowed(check.timeWindow[0], check.timeWindow[1])
+                        : entries
+                      return (
+                        <li key={idx} className="check">
+                          <div className="check__header">
+                            <div className={`badge badge--${check.status}`}>
+                              {check.status === 'met'
+                                ? 'Met'
+                                : check.status === 'partial'
+                                  ? 'Partial'
+                                  : 'Missed'}
+                            </div>
+                            <div>
+                              <div className="check__label">{check.label}</div>
+                              <div className="check__detail">{check.detail}</div>
+                            </div>
                           </div>
-                        ))}
-                      </div>
-                    </details>
-                  ) : (
+                          {subset.length > 0 && (
+                            <details className="transcript">
+                              <summary>Show related transcript ({subset.length})</summary>
+                              <div className="transcript__list">
+                                {subset.map((row, ridx) => (
+                                  <div key={`${row.start}-${ridx}`} className="transcript__row">
+                                    <div className="time">{formatTime(row.start)}</div>
+                                    <div className="speaker">Speaker {row.speaker}</div>
+                                    <div className="text">{row.text}</div>
+                                  </div>
+                                ))}
+                              </div>
+                            </details>
+                          )}
+                        </li>
+                      )
+                    })}
+                  </ul>
+                  {entries.length === 0 && (
                     <div className="empty">No timestamped excerpts for this stage.</div>
                   )}
                 </div>
