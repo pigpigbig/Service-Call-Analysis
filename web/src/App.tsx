@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import './App.css'
 import transcript from './data/transcript.json'
 import { stages } from './data/analysis'
+import type { StageId, Stage } from './data/analysis'
 
 type TranscriptEntry = {
   start: number
@@ -11,6 +13,7 @@ type TranscriptEntry = {
 
 function App() {
   const data = transcript as TranscriptEntry[]
+  const [selectedStageId, setSelectedStageId] = useState<StageId>('introduction')
 
   const formatTime = (seconds: number) => {
     const totalSeconds = Math.max(0, Math.floor(seconds))
@@ -23,6 +26,14 @@ function App() {
     if (start === undefined || end === undefined) return data
     return data.filter((row) => row.start >= start && row.start <= end)
   }
+
+  const selectedStage: Stage =
+    stages.find((stage) => stage.id === selectedStageId) ?? stages[0]
+
+  const selectedEntries = windowed(
+    selectedStage.timeWindow?.[0],
+    selectedStage.timeWindow?.[1]
+  )
 
   return (
     <div className="page">
@@ -37,7 +48,6 @@ function App() {
 
       <section className="grid">
         {stages.map((stage) => {
-          const entries = windowed(stage.timeWindow?.[0], stage.timeWindow?.[1])
           return (
             <article key={stage.id} className="card">
               <div className="card__header">
@@ -52,23 +62,40 @@ function App() {
                   <li key={idx}>{note}</li>
                 ))}
               </ul>
-              {entries.length > 0 && (
-                <details className="transcript">
-                  <summary>Related excerpts ({entries.length})</summary>
-                  <div className="transcript__list">
-                    {entries.map((row, idx) => (
-                      <div key={`${row.start}-${idx}`} className="transcript__row">
-                        <div className="time">{formatTime(row.start)}</div>
-                        <div className="speaker">Speaker {row.speaker}</div>
-                        <div className="text">{row.text}</div>
-                      </div>
-                    ))}
-                  </div>
-                </details>
-              )}
+              <div className="card__actions">
+                <button
+                  className={`link-button ${selectedStageId === stage.id ? 'is-active' : ''}`}
+                  onClick={() => setSelectedStageId(stage.id)}
+                >
+                  View excerpts
+                </button>
+              </div>
             </article>
           )
         })}
+      </section>
+
+      <section className="excerpts">
+        <div className="section-header">
+          <div>
+            <p className="eyebrow">Stage excerpts</p>
+            <h2>{selectedStage.title}</h2>
+            <p className="section-sub">{selectedStage.summary}</p>
+          </div>
+          <div className="chip">{selectedEntries.length} lines</div>
+        </div>
+        <div className="transcript__list transcript__list--full">
+          {selectedEntries.map((row, idx) => (
+            <div key={`${row.start}-${idx}`} className="transcript__row">
+              <div className="time">{formatTime(row.start)}</div>
+              <div className="speaker">Speaker {row.speaker}</div>
+              <div className="text">{row.text}</div>
+            </div>
+          ))}
+          {selectedEntries.length === 0 && (
+            <div className="empty">No timestamped excerpts for this stage.</div>
+          )}
+        </div>
       </section>
 
       <section className="transcript-full">
