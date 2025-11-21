@@ -62,9 +62,13 @@ function App() {
                 </div>
                 <div className="accordion__meta">
                   <span className="chip">{entries.length} excerpts</span>
-                  <div className={`badge badge--${stage.verdict}`}>
-                    {stage.verdict === 'met' ? 'Met' : stage.verdict === 'partial' ? 'Partial' : 'Missed'}
-                  </div>
+                  {stage.id === 'callType' ? (
+                    <div className="label">Sales follow-up after repair</div>
+                  ) : (
+                    <div className={`badge badge--${stage.verdict}`}>
+                      {stage.verdict === 'met' ? 'Met' : stage.verdict === 'partial' ? 'Partial' : 'Missed'}
+                    </div>
+                  )}
                 </div>
               </header>
               {isOpen && (
@@ -78,13 +82,15 @@ function App() {
                       return (
                         <li key={idx} className="check">
                           <div className="check__header">
-                            <div className={`badge badge--${check.status}`}>
-                              {check.status === 'met'
-                                ? 'Met'
-                                : check.status === 'partial'
-                                  ? 'Partial'
-                                  : 'Missed'}
-                            </div>
+                            {stage.id !== 'callType' && (
+                              <div className={`badge badge--${check.status}`}>
+                                {check.status === 'met'
+                                  ? 'Met'
+                                  : check.status === 'partial'
+                                    ? 'Partial'
+                                    : 'Missed'}
+                              </div>
+                            )}
                             <div>
                               <div className="check__label">{check.label}</div>
                               <div className="check__detail">{check.detail}</div>
