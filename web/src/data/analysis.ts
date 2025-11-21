@@ -157,13 +157,14 @@ export const stages: Stage[] = [
     id: "callType",
     title: "Call Type",
     verdict: "met",
-    summary: "Sales-focused service follow-up presenting HVAC replacement/upgrade options after a repair visit.",
+    summary:
+      "Sales-focused follow-up after a repair visit, presenting HVAC replacement/upgrade options.",
     checks: [
       {
         status: "met",
-        label: "Type identified",
-        detail: "Technician finished repair/charge and pivots to replacement/upgrade recommendations.",
-        timeWindow: [10, 120],
+        label: "Identified as sales follow-up",
+        detail: "Technician says they wrapped up work and built equipment options/replacements.",
+        timeWindow: [10, 140],
       },
     ],
   },
