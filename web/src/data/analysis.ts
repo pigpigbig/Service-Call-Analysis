@@ -28,18 +28,12 @@ export const stages: Stage[] = [
     title: "Introduction",
     verdict: "partial",
     summary:
-      "Quick small talk but no explicit name/company or agenda set at the top of the call.",
+      "Checks for greeting plus clear name/company introduction.",
     checks: [
       {
         status: "missed",
-        label: "Name & company",
-        detail: "Never states their name or company during the greeting.",
-      },
-      {
-        status: "partial",
-        label: "Set expectations",
-        detail: "Starts with light chat and jumps into wrap-up without framing the agenda.",
-        timeWindow: [0, 40],
+        label: "Greeting + name/company",
+        detail: "Greets casually but never states their name or company.",
       },
     ],
     timeWindow: [0, 80],
