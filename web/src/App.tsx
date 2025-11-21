@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import transcript from './data/transcript.json'
 import { stages } from './data/analysis'
-import type { StageId, Stage } from './data/analysis'
+import type { StageId } from './data/analysis'
 
 type TranscriptEntry = {
   start: number
@@ -13,7 +13,7 @@ type TranscriptEntry = {
 
 function App() {
   const data = transcript as TranscriptEntry[]
-  const [selectedStageId, setSelectedStageId] = useState<StageId>('introduction')
+  const [openStageIds, setOpenStageIds] = useState<StageId[]>([])
 
   const formatTime = (seconds: number) => {
     const totalSeconds = Math.max(0, Math.floor(seconds))
@@ -27,13 +27,11 @@ function App() {
     return data.filter((row) => row.start >= start && row.start <= end)
   }
 
-  const selectedStage: Stage =
-    stages.find((stage) => stage.id === selectedStageId) ?? stages[0]
-
-  const selectedEntries = windowed(
-    selectedStage.timeWindow?.[0],
-    selectedStage.timeWindow?.[1]
-  )
+  const toggleStage = (id: StageId) => {
+    setOpenStageIds((prev) =>
+      prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]
+    )
+  }
 
   return (
     <div className="page">
@@ -46,56 +44,52 @@ function App() {
         </p>
       </header>
 
-      <section className="grid">
+      <section className="accordions">
         {stages.map((stage) => {
+          const entries = windowed(stage.timeWindow?.[0], stage.timeWindow?.[1])
+          const isOpen = openStageIds.includes(stage.id)
           return (
-            <article key={stage.id} className="card">
-              <div className="card__header">
-                <div className={`badge badge--${stage.verdict}`}>
-                  {stage.verdict === 'met' ? 'Met' : stage.verdict === 'partial' ? 'Partial' : 'Missed'}
+            <article key={stage.id} className={`accordion ${isOpen ? 'is-open' : ''}`}>
+              <header className="accordion__header" onClick={() => toggleStage(stage.id)}>
+                <div className="accordion__title">
+                  <div className={`badge badge--${stage.verdict}`}>
+                    {stage.verdict === 'met' ? 'Met' : stage.verdict === 'partial' ? 'Partial' : 'Missed'}
+                  </div>
+                  <h2>{stage.title}</h2>
                 </div>
-                <h2>{stage.title}</h2>
-              </div>
-              <p className="summary">{stage.summary}</p>
-              <ul className="notes">
-                {stage.notes.map((note, idx) => (
-                  <li key={idx}>{note}</li>
-                ))}
-              </ul>
-              <div className="card__actions">
-                <button
-                  className={`link-button ${selectedStageId === stage.id ? 'is-active' : ''}`}
-                  onClick={() => setSelectedStageId(stage.id)}
-                >
-                  View excerpts
-                </button>
-              </div>
+                <div className="accordion__meta">
+                  <span className="summary">{stage.summary}</span>
+                  <span className="chip">{entries.length} excerpts</span>
+                </div>
+              </header>
+              {isOpen && (
+                <div className="accordion__body">
+                  <ul className="notes">
+                    {stage.notes.map((note, idx) => (
+                      <li key={idx}>{note}</li>
+                    ))}
+                  </ul>
+                  {entries.length > 0 ? (
+                    <details className="transcript" open>
+                      <summary>Transcript excerpts</summary>
+                      <div className="transcript__list">
+                        {entries.map((row, idx) => (
+                          <div key={`${row.start}-${idx}`} className="transcript__row">
+                            <div className="time">{formatTime(row.start)}</div>
+                            <div className="speaker">Speaker {row.speaker}</div>
+                            <div className="text">{row.text}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </details>
+                  ) : (
+                    <div className="empty">No timestamped excerpts for this stage.</div>
+                  )}
+                </div>
+              )}
             </article>
           )
         })}
-      </section>
-
-      <section className="excerpts">
-        <div className="section-header">
-          <div>
-            <p className="eyebrow">Stage excerpts</p>
-            <h2>{selectedStage.title}</h2>
-            <p className="section-sub">{selectedStage.summary}</p>
-          </div>
-          <div className="chip">{selectedEntries.length} lines</div>
-        </div>
-        <div className="transcript__list transcript__list--full">
-          {selectedEntries.map((row, idx) => (
-            <div key={`${row.start}-${idx}`} className="transcript__row">
-              <div className="time">{formatTime(row.start)}</div>
-              <div className="speaker">Speaker {row.speaker}</div>
-              <div className="text">{row.text}</div>
-            </div>
-          ))}
-          {selectedEntries.length === 0 && (
-            <div className="empty">No timestamped excerpts for this stage.</div>
-          )}
-        </div>
       </section>
 
       <section className="transcript-full">
