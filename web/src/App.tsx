@@ -22,6 +22,12 @@ function App() {
     return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`
   }
 
+  const speakerLabel = (code: string) => {
+    if (code.toUpperCase() === 'B') return 'Technician'
+    if (code.toUpperCase() === 'A') return 'Customer'
+    return `Speaker ${code}`
+  }
+
   const windowed = (start?: number, end?: number) => {
     if (start === undefined || end === undefined) return data
     return data.filter((row) => row.start >= start && row.start <= end)
@@ -91,7 +97,7 @@ function App() {
                                 {subset.map((row, ridx) => (
                                   <div key={`${row.start}-${ridx}`} className="transcript__row">
                                     <div className="time">{formatTime(row.start)}</div>
-                                    <div className="speaker">Speaker {row.speaker}</div>
+                                    <div className="speaker">{speakerLabel(row.speaker)}</div>
                                     <div className="text">{row.text}</div>
                                   </div>
                                 ))}
@@ -121,7 +127,7 @@ function App() {
           {data.map((row, idx) => (
             <div key={`${row.start}-${idx}`} className="transcript__row">
               <div className="time">{formatTime(row.start)}</div>
-              <div className="speaker">Speaker {row.speaker}</div>
+              <div className="speaker">{speakerLabel(row.speaker)}</div>
               <div className="text">{row.text}</div>
             </div>
           ))}
