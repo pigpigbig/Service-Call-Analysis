@@ -64,6 +64,8 @@ function App() {
                   <span className="chip">{entries.length} excerpts</span>
                   {stage.id === 'callType' ? (
                     <div className="label">Sales follow-up after repair</div>
+                  ) : stage.id === 'salesInsights' ? (
+                    <div className="label">Sales signals & opportunities</div>
                   ) : (
                     <div className={`badge badge--${stage.verdict}`}>
                       {stage.verdict === 'met' ? 'Met' : stage.verdict === 'partial' ? 'Partial' : 'Missed'}
@@ -82,7 +84,7 @@ function App() {
                       return (
                         <li key={idx} className="check">
                           <div className="check__header">
-                            {stage.id !== 'callType' && (
+                            {stage.id !== 'callType' && stage.id !== 'salesInsights' && (
                               <div className={`badge badge--${check.status}`}>
                                 {check.status === 'met'
                                   ? 'Met'

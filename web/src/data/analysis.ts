@@ -175,12 +175,25 @@ export const stages: Stage[] = [
     id: "salesInsights",
     title: "Sales Insights",
     verdict: "partial",
-    summary: "Strong framing and rebate use; missed budget check and tight close.",
+    summary:
+      "Sales signals and opportunities: customer interest in heat pumps/financing; good rebate framing; missed budget check and firm follow-up.",
     checks: [
       {
         status: "met",
+        label: "Customer interest: heat pumps",
+        detail: "Customer engages on heat pump options and noise/placement preferences.",
+        timeWindow: [180, 760],
+      },
+      {
+        status: "met",
+        label: "Customer interest: financing",
+        detail: "Customer asks about financing terms and payments.",
+        timeWindow: [1516, 1690],
+      },
+      {
+        status: "met",
         label: "Value framing",
-        detail: "Highlights efficiency, rebates, noise reduction, brand credibility (Daikin training).",
+        detail: "Tech uses rebates, efficiency, and brand credibility to position upgrades.",
         timeWindow: [180, 850],
       },
       {
@@ -191,7 +204,7 @@ export const stages: Stage[] = [
       {
         status: "missed",
         label: "Close quality",
-        detail: "Relies on emailed estimates; no scheduled follow-up or maintenance upsell close.",
+        detail: "Relies on emailed estimates; no scheduled follow-up/decision date or maintenance upsell close.",
       },
       {
         status: "partial",
