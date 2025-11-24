@@ -49,18 +49,18 @@ export const stages: Stage[] = [
     title: "Problem Diagnosis",
     verdict: "partial",
     summary:
-      "References earlier findings (freeze-up, mold, efficiency drop) but does not re-verify symptoms on this call.",
+      "Minimal inquiry this call: technician references earlier findings (freeze-up, mold, expected efficiency drop) but asks no fresh questions to understand the customer’s current symptoms or concerns.",
     checks: [
       {
         status: "partial",
         label: "Restate issues",
-        detail: "Mentions coil freezing, mold, expected efficiency decline.",
+        detail: "Mentions coil freezing, mold, expected efficiency decline from prior visit.",
         timeWindow: [80, 130],
       },
       {
         status: "missed",
         label: "Ask probing questions",
-        detail: "No fresh questions to confirm current symptoms or priorities.",
+        detail: "Does not ask about current symptoms, comfort issues, or priorities during this call.",
       },
     ],
     timeWindow: [80, 180],
