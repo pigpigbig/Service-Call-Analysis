@@ -191,6 +191,12 @@ export const stages: Stage[] = [
         timeWindow: [1516, 1690],
       },
       {
+        status: "partial",
+        label: "Packaging",
+        detail: "Mentions duct sealing promotion; could bundle maintenance + sealing with heat pump to boost acceptance.",
+        timeWindow: [430, 760],
+      },
+      {
         status: "met",
         label: "Value framing",
         detail: "Tech uses rebates, efficiency, and brand credibility to position upgrades.",
@@ -205,12 +211,6 @@ export const stages: Stage[] = [
         status: "missed",
         label: "Close quality",
         detail: "Relies on emailed estimates; no scheduled follow-up/decision date or maintenance upsell close.",
-      },
-      {
-        status: "partial",
-        label: "Packaging",
-        detail: "Mentions duct sealing promotion; could bundle maintenance + sealing with heat pump to boost acceptance.",
-        timeWindow: [430, 760],
       },
     ],
     timeWindow: [180, 900],
