@@ -102,6 +102,16 @@ h1 {
   gap: 10px;
 }
 
+.chevron {
+  display: inline-block;
+  transition: transform 0.2s ease;
+  color: #475569;
+}
+
+.chevron--open {
+  transform: rotate(90deg);
+}
+
 .accordion__title h2 {
   margin: 0;
 }
