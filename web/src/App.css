@@ -106,6 +106,7 @@ h1 {
   display: inline-block;
   transition: transform 0.2s ease;
   color: #475569;
+  font-size: 1.3rem;
 }
 
 .chevron--open {
