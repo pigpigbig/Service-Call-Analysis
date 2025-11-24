@@ -1,6 +1,7 @@
 # Service Call Analysis
 
-Take-home for Service Call Recording Analysis. Tools: AssemblyAI for transcription; analysis and code produced with Codex/ChatGPT assistance.
+Take-home for Service Call Recording Analysis.
+Tools: AssemblyAI for transcription; analysis and code produced with Codex/ChatGPT assistance.
 
 ## What’s here
 - Transcript: `transcript/transcript.txt` (human-friendly) and `transcript/raw_transcript.json` (AssemblyAI response).
