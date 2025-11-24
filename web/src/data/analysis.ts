@@ -118,18 +118,19 @@ export const stages: Stage[] = [
     id: "maintenance",
     title: "Maintenance Plan Offer",
     verdict: "partial",
-    summary: "Mentions matched warranties if on the maintenance plan but provides no plan details or close.",
+    summary:
+      "Briefly mentions a maintenance program tied to matching warranties but does not clearly offer, price, or enroll the customer.",
     checks: [
       {
         status: "partial",
-        label: "Offer mentioned",
-        detail: "Notes maintenance program ties to 10-year warranty matching.",
+        label: "Offer maintenance plan",
+        detail: "References a maintenance program to match 10-year warranties, but no explicit plan pitch.",
         timeWindow: [430, 520],
       },
       {
         status: "missed",
         label: "Explain & close",
-        detail: "No pricing, cadence, or enrollment ask for the maintenance plan.",
+        detail: "No plan details (price, cadence, benefits) and no ask to enroll or schedule.",
       },
     ],
     timeWindow: [430, 520],
