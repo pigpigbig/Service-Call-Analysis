@@ -84,7 +84,7 @@ function App() {
                       return (
                         <li key={idx} className="check">
                           <div className="check__header">
-                            {stage.id !== 'callType' && stage.id !== 'salesInsights' && (
+                            {stage.id !== 'callType' && (
                               <div className={`badge badge--${check.status}`}>
                                 {check.status === 'met'
                                   ? 'Met'
