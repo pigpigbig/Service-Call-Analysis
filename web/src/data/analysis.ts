@@ -54,7 +54,8 @@ export const stages: Stage[] = [
       {
         status: "partial",
         label: "Restate issues",
-        detail: "Mentions coil freezing, mold, expected efficiency decline from prior visit.",
+        detail:
+          "Recaps prior findings (coil freeze, mold, looming efficiency drop) without confirming with customer—shows some understanding but no fresh validation.",
         timeWindow: [80, 130],
       },
       {
