@@ -58,9 +58,6 @@ function App() {
             <article key={stage.id} className={`accordion ${isOpen ? 'is-open' : ''}`}>
               <header className="accordion__header" onClick={() => toggleStage(stage.id)}>
                 <div className="accordion__title">
-                  <span className={`chevron ${isOpen ? 'chevron--open' : ''}`} aria-hidden="true">
-                    ▸
-                  </span>
                   <h2>{stage.title}</h2>
                 </div>
                 <div className="accordion__meta">
