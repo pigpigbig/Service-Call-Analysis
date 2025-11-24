@@ -53,15 +53,15 @@ export const stages: Stage[] = [
     checks: [
       {
         status: "partial",
-        label: "Restate issues",
+        label: "Inquire about issue",
         detail:
-          "Recaps prior findings (coil freeze, mold, looming efficiency drop) without confirming with customer—shows some understanding but no fresh validation.",
+          "Recaps prior findings (coil freeze, mold, looming efficiency drop) but does not ask what the customer is experiencing now.",
         timeWindow: [80, 130],
       },
       {
         status: "missed",
-        label: "Ask probing questions",
-        detail: "Does not ask about current symptoms, comfort issues, or priorities during this call.",
+        label: "Confirm understanding",
+        detail: "No probing questions to validate symptoms, comfort issues, or priorities with the customer.",
       },
     ],
     timeWindow: [80, 180],
