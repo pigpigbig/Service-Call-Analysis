@@ -200,5 +200,6 @@ export const stages: Stage[] = [
         timeWindow: [430, 760],
       },
     ],
+    timeWindow: [180, 900],
   },
 ];
