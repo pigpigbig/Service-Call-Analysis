@@ -106,7 +106,7 @@ h1 {
   display: inline-block;
   transition: transform 0.2s ease;
   color: #475569;
-  font-size: 1.6rem;
+  font-size: 2rem;
 }
 
 .chevron--open {
@@ -229,6 +229,15 @@ h1 {
   cursor: pointer;
   color: #0f172a;
   font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.transcript summary::marker {
+  font-size: 0.8em;
+}
+
+.transcript summary::-webkit-details-marker {
+  font-size: 0.8em;
 }
 
 .transcript__list {
